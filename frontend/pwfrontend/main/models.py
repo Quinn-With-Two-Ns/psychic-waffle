@@ -14,9 +14,9 @@ class Food(models.Model):
 
 class Nutrients(models.Model):
     name = models.CharField(max_length=100)
-    amount = models.IntegerField()
-    user = models.ForeignKey(Food, on_delete=models.CASCADE)
+    amount = models.CharField(max_length=100,default='SOME STRING')
+
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
-    user = models.ForeignKey(Food, on_delete=models.CASCADE)
+    amount = models.CharField(max_length=100,default='SOME STRING')

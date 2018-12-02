@@ -1,9 +1,114 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit" class="btn btn-success">Save person</button>
-  </form>
+
+
+<div class="container mx-auto text-center">
+
+<div class="container mb-5 mt=5 ">
+   <div class="card mx-auto" style="width: 18rem; height: 18rem;">
+  <img class="card-img-top" src="https://chocolatecoveredkatie.com/wp-content/uploads/2016/03/image-7.png" alt="Card image cap">
+  <div class="card-body">
+
+  </div>
+</div>
+</div>
+
+
+<div class="continaer" >
+    <div class="card shadow-lg mx-auto mb-5 mt=5" style="width: 20rem;">
+         <ul class="list-group">
+             <li class="list-group-item active">Munchies BBQ</li>
+            <li class="list-group-item">Dapibus ac facilisis in  10</li>
+            <li class="list-group-item">Morbi leo risus  10</li>
+            <li class="list-group-item">Porta ac consectetur ac  10</li>
+            <li class="list-group-item">Vestibulum at eros  10</li>
+         </ul>
+     </div>
+</div>
+
+<div class="container">
+     <div class="row">
+        <div class="col col-md-6 ">
+            <div class="card mb-5 mt=5 ">
+                <div class="card-header text-white bg-success">Onion</div>
+                   <ul class="list-group">
+
+            <li class="list-group-item">carbohydrate 10</li>
+            <li class="list-group-item">vitamin C  10</li>
+            <li class="list-group-item">protein  10</li>
+    </ul>
+            </div>
+        </div>
+         <div class="col col-md-6">
+            <div class="card mb-5 mt=5">
+                <div class="card-header text-white bg-success">Tomatoes</div>
+                  <ul class="list-group">
+
+            <li class="list-group-item">carbohydrate 10</li>
+            <li class="list-group-item">vitamin C  10</li>
+            <li class="list-group-item">protein  10</li>
+    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-6">
+            <div class="card mb-5 mt=5 ">
+                <div class="card-header text-white bg-danger">Peanuts</div>
+                   <ul class="list-group">
+
+            <li class="list-group-item">carbohydrate 10</li>
+            <li class="list-group-item">vitamin C  10</li>
+            <li class="list-group-item">protein  10</li>
+    </ul>
+            </div>
+        </div>
+         <div class="col col-md-6">
+            <div class="card mb-5 mt=5 ">
+                <div class="card-header text-white bg-warning">Sugar</div>
+                   <ul class="list-group">
+
+            <li class="list-group-item">carbohydrate 10</li>
+            <li class="list-group-item">vitamin C  10</li>
+            <li class="list-group-item">protein  10</li>
+    </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col col-md-6 ">
+            <div class="card mb-5 mt=5 ">
+                <div class="card-header text-white bg-success">Onion</div>
+                  <ul class="list-group">
+
+            <li class="list-group-item">carbohydrate 10</li>
+            <li class="list-group-item">vitamin C  10</li>
+            <li class="list-group-item">protein  10</li>
+    </ul>
+            </div>
+        </div>
+         <div class="col col-md-6">
+            <div class="card mb-5 mt=5">
+                <div class="card-header text-white bg-success">Tomatoes</div>
+                    <ul class="list-group">
+
+            <li class="list-group-item">carbohydrate 10</li>
+            <li class="list-group-item">vitamin C  10</li>
+            <li class="list-group-item">protein  10</li>
+    </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+
+
 {% endblock %}
