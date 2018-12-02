@@ -29,3 +29,16 @@ def read_label(tesseract_cmd, image_path):
 
         if line == "Teneur % valeur quotidienne":
             startparse = True
+
+def parse_ingredients(tesseract_cmd, image_path):
+    img = cv2.imread(image_path)
+    pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
+    label_text = pytesseract.image_to_string(img)
+
+    nutrition_map = {}
+    print(label_text)
+    startparse = False
+    m = re.findall('INGREDIENTS:((.+\s)*)', label_text)
+    ingredients =m[0][0].replace('\n', ' ')
+    ingredients = ingredients.split(',')
+    return ingredients
