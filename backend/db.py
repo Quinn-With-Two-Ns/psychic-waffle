@@ -1,123 +1,32 @@
 import sqlite3
 
-conn = sqlite3.connect('test.db')
+class DbHandler(object):
+    def __init__(self, dbfile):
+        self.conn = sqlite3.connect(dbfile)
+        self.c = self.conn.cursor()
 
-c = conn.cursor()
+    def add_user(self, user_name):
+        query = "INSERT INTO users (name) VALUES ('{}')".format(user_name)
+        self.c.execute(query)
+        self.conn.commit()
 
-# Create users table
-c.execute('''CREATE TABLE users (
-                  user_id INTEGER PRIMARY KEY,
-                  name text NOT NULL
-              )''')
+    def add_restriction(self, r_name, r_type):
+        query = "INSERT INTO restrictions (name, type) VALUES ('{}', '{}')".format(r_name, r_type)
+        self.c.execute(query)
+        self.conn.commit()
 
-# Create restriction table
-c.execute('''CREATE TABLE restrictions (
-                  restriction_id INTEGER PRIMARY KEY,
-                  name text NOT NULL,
-                  type text NOT NULL
-              )''')
+    def add_consumption(self, user_id, ingred, nutri):
+        date = 0 #TODO get datetime
+        query = "INSERT INTO restrictions (user_id, ingreds, nutrients, date) VALUES ('{}', '{}')".format(user_id, ingred, nutri, date)
+        self.c.execute(query)
 
-# Create ingred_restriction table
-c.execute('''CREATE TABLE ingred_restricts (
-                  ingred_restrict_id INTEGER PRIMARY KEY,
-                  restriction_id INTEGER NOT NULL,
-                  amount text NOT NULL
-              )''')
+        #Add food item to fooditem table
+        self.conn.commit()
 
-# Create nutri_restriction table
-c.execute('''CREATE TABLE nutri_restricts (
-                  nutri_restrict_id INTEGER PRIMARY KEY,
-                  restriction_id INTEGER NOT NULL,
-                  amount text NOT NULL
-              )''')
+    def get_consumption(self, user_name):
+        query = "SELECT * FROM consumptions WHERE user_id IS WHERE user_id IS (SELECT user_id FROM users WHERE name IS {})".format(user_name)
+        result = self.c.execute(query)
+        consum = result.fetchone()[0]
+        return consum
 
-# Create consumptions table
-c.execute('''CREATE TABLE consumptions (
-                  consumption_id INTEGER PRIMARY KEY,
-                  user_id INTEGER NOT NULL,
-                  ingreds text NOT NULL,
-                  nutrients text NOT NULL,
-                  date text NOT NULL
-              )''')
-
-# Create fooditem  table
-c.execute('''CREATE TABLE food (
-                  food_id INTEGER PRIMARY KEY,
-                  name text NOT NULL
-              )''')
-
-# Create ingredients table
-c.execute('''CREATE TABLE ingredients (
-                  ingred_id INTEGER PRIMARY KEY,
-                  food_id INTEGER NOT NULL,
-                  name text NOT NULL,
-                  amount text NOT NULL
-              )''')
-
-# Create nutrients table
-c.execute('''CREATE TABLE nutrients (
-                  nutri_id INTEGER PRIMARY KEY,
-                  food_id INTEGER NOT NULL,
-                  name text NOT NULL,
-                  amount text NOT NULL
-              )''')
-
-# Insert a row of data
-#c.execute("INSERT INTO users (name) VALUES ('Andrew')")
-
-# Save (commit) the changes
-conn.commit()
-
-# We can also close the connection if we are done with it.
-# Just be sure any changes have been committed or they will be lost.
-conn.close()
-
-
-
-### user
-# id 
-# name
-
-### restriction
-# id
-# user_id -> user.id
-# name
-# type
-# ingredients (with limit)
-# nutrition (with limit)
-
-### ingredient restriction
-# id
-# restriction_id -> restriction.id
-# amount
-
-### nutrition restriction
-# id
-# nutrition_id -> nutrition.id
-# amount
-
-### consumption
-# id
-# user_id -> user.id
-# ingredients
-# nutrients
-# date
-
-#--------------------
-
-### fooditem
-# id 
-# name
-
-### ingredient
-# id
-# fooditem_id -> fooditem.id
-# name
-# amount
-
-### nutrient
-# id
-# fooditem_id -> fooditem.id
-# name
-# amount
-
+    
