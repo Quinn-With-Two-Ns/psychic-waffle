@@ -1,4 +1,6 @@
 import sqlite3
+import api
+import json
 
 class DbHandler(object):
     def __init__(self, dbfile):
@@ -15,9 +17,24 @@ class DbHandler(object):
         self.c.execute(query)
         self.conn.commit()
 
-    def add_consumption(self, user_id, ingred, nutri):
+    #def add_item(self, item_name, image_path):
+    #    tesseract_cmd  = r'/usr/bin/tesseract'
+    #    food_data = api.read_label(tesseract_cmd, image_path)
+    #    print(item_name)
+    #    #print(type(json.dumps(food_data)))
+    #    query = "INSERT INTO food (name) VALUES ('{}')".format(item_name)
+    #    self.c.execute(query)
+    #    item_id = self.c.lastrowid
+        
+
+    #def add_consumption(self, user_id, ingred, nutri):
+    def add_consumption(self, user_id, image_path):
+        tesseract_cmd  = r'/usr/bin/tesseract'
+        food_data = api.read_label(tesseract_cmd, image_path)
         date = 0 #TODO get datetime
-        query = "INSERT INTO restrictions (user_id, ingreds, nutrients, date) VALUES ('{}', '{}')".format(user_id, ingred, nutri, date)
+        ingred = "TBD"
+        nutri = json.dumps(food_data)
+        query = "INSERT INTO consumptions (user_id, ingreds, nutrients, date) VALUES ('{}', '{}', '{}', '{}')".format(user_id, ingred, nutri, date)
         self.c.execute(query)
 
         #Add food item to fooditem table
